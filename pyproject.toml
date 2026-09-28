@@ -1,0 +1,14 @@
+[project]
+name = "rc-athlete"
+version = "0.1.0"
+description = "Bot that posts sports updates to a Zulip channel"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "zulip>=0.9.1",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.5.1",
+]
