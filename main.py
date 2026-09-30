@@ -22,37 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-
 from datetime import datetime, timezone
 
 from flask import Flask
+from jinja2 import Environment, PackageLoader, select_autoescape
 import zulip
 
 app = Flask(__name__)
 
-PAGE = """<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hello from RC</title>
-<style>
-body {{ font-family: system-ui, sans-serif; max-width: 34rem; margin: 15vh auto; padding: 0 1.5rem; line-height: 1.5; color: #222; }}
-a {{ color: #0645ad; }}
-</style>
-</head>
-<body>
-<h1>Hello from Flask.</h1>
-<p>This page is served by a small Flask app deployed with <a href="https://disco.cloud">Disco</a>.</p>
-<p>The server time is {now}.</p>
+jinja_env = Environment(loader=PackageLoader("main"), autoescape=select_autoescape())
 
-<form method="POST" action="javascript:fetch('/send-message',{{method:'POST'}}).then((resp)=>{{console.log(resp);alert('sent')}})">
-<input type="submit" value="Send message to Zulip!" />
-</form>
-
-</body>
-</html>
-"""
+template = jinja_env.get_template("mytemplate.html")
 
 # No zuliprc - client is configured using environment variables via dashboard.disco.cloud
 client = zulip.Client()
@@ -62,7 +42,7 @@ client = zulip.Client()
 def index():
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     # now = datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %H:%M:%S")
-    return PAGE.format(now=now)
+    return template.render(now=now)
 
 
 @app.route("/send-message", methods=["POST"])

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello from RC</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 34rem; margin: 15vh auto; padding: 0 1.5rem; line-height: 1.5; color: #222; }
+a { color: #0645ad; }
+</style>
+<script>
+async function sendMessage() {
+    try {
+        const response = await fetch('/send-message', {
+            method: 'POST'
+        });
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+</script>
+</head>
+<body>
+<h1>Hello from Flask.</h1>
+<p>This page is served by a small Flask app deployed with <a href="https://disco.cloud">Disco</a>.</p>
+<p>The server time is {{ now }}.</p>
+
+<form method="POST" action="javascript:sendMessage()">
+<input type="submit" value="Send message to Zulip!" />
+</form>
+
+</body>
+</html>
