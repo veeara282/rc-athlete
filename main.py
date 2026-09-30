@@ -25,14 +25,14 @@ SOFTWARE.
 from datetime import datetime, timezone
 
 from flask import Flask
-from jinja2 import Environment, PackageLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 import zulip
 
 app = Flask(__name__)
 
-jinja_env = Environment(loader=PackageLoader("main"), autoescape=select_autoescape())
+jinja_env = Environment(loader=FileSystemLoader("templates"), autoescape=select_autoescape())
 
-template = jinja_env.get_template("mytemplate.html")
+template = jinja_env.get_template("index.html.j2")
 
 # No zuliprc - client is configured using environment variables via dashboard.disco.cloud
 client = zulip.Client()
