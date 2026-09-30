@@ -18,3 +18,7 @@ Bot that posts sports updates to a Zulip channel
     ```
 - Post messages to Zulip: https://recurse.zulipchat.com/api/send-message
   - Zulip recommends putting config in a `.zuliprc` file
+
+## Third-party software
+
+`disco.json` is copied from https://github.com/letsdiscodev/example-flask-site/blob/main/disco.json
