@@ -24,9 +24,9 @@ SOFTWARE.
 
 
 from datetime import datetime, timezone
-from zoneinfo import ZoneInfo
 
 from flask import Flask
+import zulip
 
 app = Flask(__name__)
 
@@ -45,9 +45,17 @@ a {{ color: #0645ad; }}
 <h1>Hello from Flask.</h1>
 <p>This page is served by a small Flask app deployed with <a href="https://disco.cloud">Disco</a>.</p>
 <p>The server time is {now}.</p>
+
+<form method="POST" action="/send-message">
+<input type="submit" value="Send message to Zulip!" />
+</form>
+
 </body>
 </html>
 """
+
+# No zuliprc - client is configured using environment variables via dashboard.disco.cloud
+client = zulip.Client()
 
 
 @app.route("/")
@@ -55,6 +63,18 @@ def index():
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     # now = datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %H:%M:%S")
     return PAGE.format(now=now)
+
+
+@app.route("/send-message", methods=["POST"])
+def send_message():
+    request = {
+        "type": "channel",
+        "to": "test-bot",
+        "topic": "sports bot",
+        "content": "Let's go Knicks!",
+    }
+    result = client.send_message(request)
+    return result
 
 
 if __name__ == "__main__":
