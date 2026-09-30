@@ -46,7 +46,7 @@ a {{ color: #0645ad; }}
 <p>This page is served by a small Flask app deployed with <a href="https://disco.cloud">Disco</a>.</p>
 <p>The server time is {now}.</p>
 
-<form method="POST" action="/send-message">
+<form method="POST" action="javascript:fetch('/send-message').then((resp)=>{{document.write('Success!')}})">
 <input type="submit" value="Send message to Zulip!" />
 </form>
 
