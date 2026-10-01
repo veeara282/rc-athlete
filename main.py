@@ -30,7 +30,9 @@ import zulip
 
 app = Flask(__name__)
 
-jinja_env = Environment(loader=FileSystemLoader("templates"), autoescape=select_autoescape())
+jinja_env = Environment(
+    loader=FileSystemLoader("templates"), autoescape=select_autoescape()
+)
 
 template = jinja_env.get_template("index.html.j2")
 

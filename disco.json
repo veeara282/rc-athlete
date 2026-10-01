@@ -3,6 +3,16 @@
     "services": {
         "web": {
             "port": 8080
+        },
+        "post-weekly-schedule": {
+            "type": "cron",
+            "schedule": "0 11 * * 1",
+            "command": "uv run post_weekly_schedule.py"
+        },
+        "test-utc-cron": {
+            "type": "cron",
+            "schedule": "*/5 21 * * *",
+            "command": "uv run post_weekly_schedule.py"
         }
     }
 }

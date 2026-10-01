@@ -52,4 +52,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 USER disco
 
 # Run main.py through uv
-CMD ["uv", "run", "python", "main.py"]
+CMD ["uv", "run", "main.py"]
