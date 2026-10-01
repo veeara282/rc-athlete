@@ -7,4 +7,4 @@ client = zulip_utils.get_client()
 
 
 now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-zulip_utils.send_message("Hello, world! It is {now}")
+zulip_utils.send_message(f"Hello, world! It is {now}")
