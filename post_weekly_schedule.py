@@ -1,3 +1,6 @@
+"""cron job: runs every Monday at 13:00 UTC (9:00 am EDT or 8:00 am EST)
+"""
+
 from datetime import datetime, timezone
 
 import zulip_utils
